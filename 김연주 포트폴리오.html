@@ -1,0 +1,1064 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>김연주 | 포트폴리오</title>
+    <style>
+        :root {
+            --bg: #f8f9fc;
+            --card: #ffffff;
+            --text: #1d1f24;
+            --muted: #606771;
+            --accent: #ff6a00;
+            --accent2: #ff8a3d;
+            --border: rgba(0, 0, 0, 0.06);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(1200px 600px at 20% 0%, rgba(255, 106, 0, 0.05), transparent 60%),
+                radial-gradient(900px 500px at 90% 10%, rgba(255, 138, 61, 0.04), transparent 55%),
+                var(--bg);
+            color: var(--text);
+            font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+            line-height: 1.6;
+            letter-spacing: -0.2px;
+            word-break: keep-all;
+        }
+
+        a {
+            color: inherit
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 28px 18px 80px
+        }
+
+        /* Password gate */
+        .gate {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(1200px 700px at 15% 0%, rgba(255, 106, 0, .18), transparent 55%),
+                radial-gradient(900px 600px at 85% 10%, rgba(255, 138, 61, .14), transparent 55%),
+                #07080b;
+            z-index: 9999;
+        }
+
+        .gate-card {
+            width: min(520px, 92vw);
+            background: rgba(17, 19, 26, .80);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 22px;
+            backdrop-filter: blur(10px);
+        }
+
+        .gate-badge {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 106, 0, .35);
+            background: rgba(255, 106, 0, .10);
+            color: var(--text);
+            font-size: 12px;
+        }
+
+        .gate h1 {
+            margin: 12px 0 6px;
+            font-size: 20px
+        }
+
+        .gate p {
+            margin: 0 0 14px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        input[type="password"] {
+            flex: 1;
+            padding: 12px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, .16);
+            background: rgba(0, 0, 0, .25);
+            color: var(--text);
+            outline: none;
+        }
+
+        input[type="password"]:focus {
+            border-color: rgba(255, 106, 0, .55)
+        }
+
+        button {
+            padding: 12px 14px;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #0b0c10;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .err {
+            margin-top: 10px;
+            color: #ffb3a0;
+            font-size: 12px;
+            display: none
+        }
+
+        header {
+            padding: 22px 0 10px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 22px;
+        }
+
+        .profile-wrap {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: #eee;
+        }
+
+        .top {
+            display: flex;
+            gap: 14px;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.6px;
+            margin: 0
+        }
+
+        .role {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .pill {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.03);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .05);
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .pill span b {
+            color: var(--text);
+            margin-right: 4px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 860px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-pad {
+            padding: 18px
+        }
+
+        .kicker {
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase
+        }
+
+        .h2 {
+            font-size: 22px;
+            margin: 8px 0 8px;
+            letter-spacing: -.4px
+        }
+
+        .lead {
+            color: var(--muted);
+            margin: 0
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 14px
+        }
+
+        @media (max-width: 860px) {
+            .metric-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .metric {
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, .02);
+        }
+
+        .metric .label {
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .metric .value {
+            font-size: 18px;
+            font-weight: 800;
+            margin-top: 2px
+        }
+
+        .metric .note {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 2px
+        }
+
+        section {
+            margin-top: 26px
+        }
+
+        .sec-title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .sec-title h3 {
+            margin: 0;
+            font-size: 16px;
+            letter-spacing: -.2px
+        }
+
+        .sec-title p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 860px) {
+            .two {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .list {
+            margin: 10px 0 0;
+            padding-left: 16px;
+            color: var(--text)
+        }
+
+        .list li {
+            margin: 6px 0
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .tag b {
+            color: var(--accent2)
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        @media (max-width: 860px) {
+            .gallery {
+                grid-template-columns: 1fr
+            }
+        }
+
+        figure {
+            margin: 0
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, .02);
+        }
+
+        figcaption {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 22px 0 0
+        }
+
+        footer {
+            margin-top: 34px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Strategy Diagram */
+        .strategy-container {
+            margin-top: 20px;
+            padding: 24px;
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.01));
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .strategy-slogan {
+            font-size: 13px;
+            color: var(--accent2);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .strategy-title {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(to right, #1d1f24, var(--muted));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            position: relative;
+        }
+
+        .strategy-grid::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1), transparent);
+        }
+
+        .strategy-col h4 {
+            font-size: 14px;
+            margin: 0 0 16px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .circles-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+            position: relative;
+        }
+
+        .s-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 106, 0, 0.3);
+            background: rgba(255, 106, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 10px;
+            line-height: 1.2;
+            position: absolute;
+            backdrop-filter: blur(4px);
+            transition: transform 0.3s ease;
+        }
+
+        .s-circle:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+            z-index: 10;
+        }
+
+        .c1 {
+            left: 0%;
+            top: 10%;
+        }
+
+        .c2 {
+            left: 25%;
+            top: 35%;
+            width: 85px;
+            height: 85px;
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.2);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .c3 {
+            left: 55%;
+            top: 5%;
+        }
+
+        .c4 {
+            left: 75%;
+            top: 40%;
+        }
+
+        .strategy-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .s-step {
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+        }
+
+        .s-step b {
+            display: block;
+            font-size: 13px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .s-step span {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.4;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-grid::after {
+                display: none;
+            }
+
+            .circles-wrap {
+                height: 180px;
+            }
+        }
+
+        /* Board Game Concept Roadmap */
+        .roadmap-container {
+            margin-top: 24px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        .roadmap-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .roadmap-intent {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--bg);
+            border-radius: 99px;
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            position: relative;
+        }
+
+        .roadmap-path {
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: repeating-linear-gradient(to right, transparent, transparent 10px, rgba(0, 0, 0, 0.05) 10px, rgba(0, 0, 0, 0.05) 20px);
+            z-index: 0;
+        }
+
+        .roadmap-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .roadmap-step:hover .step-icon {
+            transform: translateY(-8px) rotate(5deg);
+            border-color: var(--accent);
+            box-shadow: 0 12px 30px rgba(255, 106, 0, 0.15);
+        }
+
+        .step-tag {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            color: var(--muted);
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .step-copy {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .step-desc {
+            font-size: 11.5px;
+            line-height: 1.55;
+            color: var(--muted);
+            padding: 0 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .roadmap-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .roadmap-path {
+                display: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print */
+        @media print {
+            .gate {
+                display: none !important
+            }
+
+            body {
+                background: #fff;
+                color: #111
+            }
+
+            .card {
+                box-shadow: none
+            }
+
+            a {
+                color: #111
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Password Gate (lightweight; not strong security) -->
+    <div class="gate" id="gate">
+        <div class="gate-card">
+            <div class="gate-badge">🔒 비공개 포트폴리오</div>
+            <h1>접근 비밀번호를 입력해 주세요</h1>
+            <p>링크 공유는 가능하지만, 비밀번호는 별도 전달용입니다.</p>
+            <div class="row">
+                <input id="pw" type="password" placeholder="Password" autocomplete="current-password" />
+                <button id="enter">입장</button>
+            </div>
+            <div class="err" id="err">비밀번호가 올바르지 않습니다.</div>
+            <p class="muted" style="margin-top:12px;">
+                * 보안이 매우 중요한 경우, GitHub Pages 단독 공개 대신 서버 Basic Auth(또는 Notion 비번/기업용 공유)로 운영을 권장합니다.
+            </p>
+        </div>
+    </div>
+
+    <div class="wrap" id="app" style="display:none">
+
+        <header>
+            <div class="row align-center space-between" style="flex-wrap: wrap; gap: 20px;">
+                <div class="profile-wrap">
+                    <img src="assets/profile.png" alt="Profile" class="profile-img" />
+                    <div>
+                        <h1 class="name">김연주</h1>
+                        <p class="role">디지털 마케팅 과장 | 교육 서비스 콘텐츠·캠페인·서비스 기획 리드</p>
+                    </div>
+                </div>
+                <div class="pill"
+                    style="gap: 16px; background: rgba(0, 0, 0, 0.03); padding: 8px 18px; border: 1px solid rgba(0,0,0,0.05)">
+                    <span><b>Email</b> idsj2824@naver.com</span>
+                    <span style="opacity: 0.1">|</span>
+                    <span><b>Phone</b> 010-8823-2824</span>
+                </div>
+            </div>
+
+
+        </header>
+
+        <!-- ABOUT -->
+        <section>
+            <div class="sec-title">
+                <h3>ABOUT ME</h3>
+                <p>기획 → 실행 → 정리(리포트)까지 마무리하는 프로젝트 리딩</p>
+            </div>
+            <div class="two">
+                <div class="card">
+                    <div class="card-pad">
+                        <p style="margin:0">
+                            교육 서비스 도메인에서 디지털 마케팅과 콘텐츠 기획을 담당해 왔습니다.
+                            지점 오픈/브랜드 런칭/시즌 프로모션처럼 ‘시작점이 중요한 프로젝트’를 중심으로,
+                            타겟 인사이트 기반 정보 구조 설계와 온·오프라인 채널 연계를 통해 성과를 만들었습니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-pad">
+                        <p class="muted" style="margin:0 0 10px">Core focus</p>
+                        <ul class="list">
+                            <li>타겟 탐색 흐름 기반 <b>랜딩/콘텐츠 구조 설계</b></li>
+                            <li>광고·홍보물·상담 메시지 <b>일관성</b> 구축</li>
+                            <li>대행사/유관부서 협업을 위한 <b>운영 구조화</b></li>
+                            <li>실행 이후 <b>성과 리포트</b>로 개선 사이클 운영</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="gap:8px; flex-wrap:wrap; margin-top:20px; justify-content: center">
+                <span class="tag"><b>#</b>디지털마케팅전략</span>
+                <span class="tag"><b>#</b>브랜드전략</span>
+                <span class="tag"><b>#</b>콘텐츠기획</span>
+                <span class="tag"><b>#</b>카피라이팅</span>
+                <span class="tag"><b>#</b>랜딩페이지기획</span>
+                <span class="tag"><b>#</b>캠페인기획</span>
+                <span class="tag"><b>#</b>온오프라인마케팅</span>
+                <span class="tag"><b>#</b>퍼포먼스마케팅</span>
+                <span class="tag"><b>#</b>전환율개선</span>
+                <span class="tag"><b>#</b>데이터기반기획</span>
+                <span class="tag"><b>#</b>서비스기획</span>
+                <span class="tag"><b>#</b>정보구조설계</span>
+                <span class="tag"><b>#</b>대행사커뮤니케이션</span>
+            </div>
+        </section>
+
+        <!-- CASE 1 -->
+        <section>
+            <div class="sec-title">
+                <h3>CASE ① 신규 지점 오픈 | 프로모션 페이지 & 통합 캠페인</h3>
+                <p>신규 지점 인지도 확보 및 상담 전환 극대화</p>
+            </div>
+
+            <div class="two">
+                <div class="card">
+                    <div class="card-pad">
+                        <p class="muted" style="margin:0 0 8px">Background & Problem</p>
+                        <ul class="list">
+                            <li>지역 내 낮은 브랜드 인지도와 초기 시장 진입의 어려움</li>
+                            <li>타겟 유입을 유도할 수 있는 매력적인 <b>첫인상(Landing Page) 및 혜택</b> 부재</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-pad">
+                        <p class="muted" style="margin:0 0 8px">Strategy</p>
+                        <ul class="list">
+                            <li><b>프로모션 페이지 중심</b>으로 핵심 메시지 집약</li>
+                            <li>타겟 기준 <b>정보 구조(IA)</b> 재설계</li>
+                            <li>광고·홍보물·상담 메시지 <b>톤/카피 일원화</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+                <div class="card-pad">
+                    <p class="muted" style="margin:0 0 10px">Creative & Page</p>
+                    <div class="gallery">
+                        <figure>
+                            <img src="DA1.jpg" alt="DA Creative 1" />
+                            <figcaption>DA 소재 ①</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="DA2.jpg" alt="DA Creative 2" />
+                            <figcaption>DA 소재 ②</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="DA3.jpg" alt="DA Creative 3" />
+                            <figcaption>DA 소재 ③</figcaption>
+                        </figure>
+                    </div>
+
+                    <div style="margin-top:12px">
+                        <figure>
+                            <img src="promotion Page Capture.png" alt="Promotion Page Capture" />
+                            <figcaption>프로모션 페이지 주요 섹션 캡처</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="two" style="margin-top:12px">
+                        <div class="metric">
+                            <div class="label">Result</div>
+                            <div class="value">전환율 13%</div>
+                            <div class="note">상담/예약 → 등록</div>
+                        </div>
+                        <div class="metric">
+                            <div class="label">Insight</div>
+                            <div class="value">"속도보다 구조"</div>
+                            <div class="note">초기 정보 설계가 운영 효율을 좌우</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE 2 (Refined: Board Game Concept) -->
+        <section>
+            <div class="sec-title">
+                <h3>CASE ② 시즌별 캠페인 전략: 보드게임 컨셉</h3>
+                <p>대입 준비 과정을 '인생 게임'으로 풀어낸 시즌별 브랜드 커뮤니케이션</p>
+            </div>
+            <div class="card">
+                <div class="card-pad">
+                    <div class="two">
+                        <div>
+                            <p class="muted" style="margin:0 0 4px">Project Overview</p>
+                            <p style="margin:0 0 16px; font-size:14px"><b>[홈페이지 & 캠페인]</b> 시즌별 컨셉 도출 및 웹 기획/제작</p>
+
+                            <p class="muted" style="margin:0 0 4px">Background & Intent</p>
+                            <ul class="list" style="margin-top:0">
+                                <li><b>고객 페인포인트</b>: 길고 지루한 대입 과정을 막연한 공포가 아닌 '도전'으로 재정의</li>
+                                <li><b>기획 의도</b>: 각 시즌별 목표를 게임의 맵(Map)으로 구성하여 도달해야 할 지점을 명확히 제시</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="muted" style="margin:0 0 4px">Execution & Results</p>
+                            <ul class="list" style="margin-top:0">
+                                <li><b>비주얼 디렉팅</b>: 보드게임 아이템, 주사위, 황금열쇠 등 메타포를 활용한 UI 설계</li>
+                                <li><b>광고 캠페인</b>: "주사위는 던져졌다" 등 세계관 기반의 후킹 메시지로 광고 집행</li>
+                                <li><b>성과</b>: 타겟 흥미 유발 및 콘텐츠 체류 시간 증대, 연간 브랜드 일관성 유지</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Roadmap Visualization -->
+                    <div class="roadmap-container">
+                        <div class="roadmap-header">
+                            <span class="roadmap-intent">Planning Strategy: The Board Game</span>
+                            <h4 style="margin:0; font-size:18px; color:var(--text)">대입 성공을 향한 4단계 전략 맵</h4>
+                        </div>
+                        <div class="roadmap-grid">
+                            <div class="roadmap-path"></div>
+
+                            <div class="roadmap-step">
+                                <div class="step-tag">Season 1</div>
+                                <div class="step-icon">🏁</div>
+                                <div class="step-title">준비의 땅</div>
+                                <div class="step-copy">“이제 게임을 시작해볼까요?”</div>
+                                <p class="step-desc">학습 루틴과 생활 습관을 점검하며 전반적인 흐름을 준비하는 <b>스타팅 포인트(Tutorial)</b></p>
+                            </div>
+
+                            <div class="roadmap-step">
+                                <div class="step-tag">Season 2</div>
+                                <div class="step-icon">🎲</div>
+                                <div class="step-title">실력의 땅</div>
+                                <div class="step-copy">“주사위는 던져졌다!”</div>
+                                <p class="step-desc">매 라운드별 퀘스트를 수행하며 학습/생활/공간을 정복해가는 성장의 <b>메인 코스</b></p>
+                            </div>
+
+                            <div class="roadmap-step">
+                                <div class="step-tag">Season 3</div>
+                                <div class="step-icon">🚀</div>
+                                <div class="step-title">전략의 땅</div>
+                                <div class="step-copy">“지름길 발견! 한 단계 점프!”</div>
+                                <p class="step-desc">자율적인 루트 선택과 전략적 설계로 효율을 극대화하는 <b>1:1 맞춤형 코스</b></p>
+                            </div>
+
+                            <div class="roadmap-step">
+                                <div class="step-tag">Season 4</div>
+                                <div class="step-icon">🔑</div>
+                                <div class="step-title">합격의 땅</div>
+                                <div class="step-copy">“황금열쇠로 합격의 문을!”</div>
+                                <p class="step-desc">실전 모의고사와 컨설팅 등 마지막 카드를 전략적으로 사용하는 <b>최종 관문</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE 3 (Renumbered from 4) -->
+        <section>
+            <div class="sec-title">
+                <h3>CASE ③ 만족도 조사 · 대시보드 리포팅</h3>
+                <p>KPI 관리: 전반적 만족도 97.3% 달성</p>
+            </div>
+            <div class="two">
+                <div class="card">
+                    <div class="card-pad">
+                        <p class="muted" style="margin:0 0 8px">Insight & Data</p>
+                        <ul class="list">
+                            <li><b>학습 관리 만족도 97.0%</b>: 1:1 질의응답 및 학습 계획 관리에 대한 높은 만족도 확인</li>
+                            <li><b>전반적인 브랜드 만족도 97.3%</b>: 입학 상담 일치 여부(98%) 및 시설 만족도(93.3%) 고득점</li>
+                            <li><b>참여율 30.0% (1,710명)</b>: 재원생 4,907명 대상 대규모 서베이 정교화</li>
+                        </ul>
+                        <div class="divider"></div>
+                        <p class="muted" style="margin:12px 0 8px">Dashboard</p>
+                        <figure style="margin:0">
+                            <img src="assets/dashboard.png" alt="Satisfaction Survey Dashboard"
+                                style="width:100%; border-radius:12px; border:1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.05);" />
+                            <figcaption>만족도 조사 데이터 시각화 보드 (Dashboard View)</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-pad">
+                        <p class="muted" style="margin:0 0 8px">Report</p>
+                        <ul class="list">
+                            <li><b>데이터 기반 의사결정</b>: 안내 및 진행 방식 개선을 위한 핵심 지표 정기 리포팅</li>
+                            <li><b>정성 후기 분석</b>: 학부모·학생 키워드 분석을 통해 다음 분기 메시지 전략화</li>
+                        </ul>
+                        <figure style="margin-top:14px">
+                            <img src="satisfaction_report_cover.png" alt="Satisfaction report cover" />
+                            <figcaption>2025 하반기 재원생 만족도 조사 분석 리포트 요약</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORKING STYLE -->
+        <section>
+            <div class="sec-title">
+                <h3>WORKING STYLE</h3>
+                <p>일을 ‘정리하고, 굴리고, 남기는’ 방식</p>
+            </div>
+            <div class="two">
+                <div class="card">
+                    <div class="card-pad">
+                        <p class="muted" style="margin:0 0 8px">How I work</p>
+                        <ul class="list">
+                            <li>문제를 <b>구조(IA/흐름)</b>로 정리합니다</li>
+                            <li>실행 가능한 기획을 만들고 <b>끝까지 운영</b>합니다</li>
+                            <li>성과를 <b>리포트</b>로 남겨 다음 개선을 준비합니다</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-pad">
+                        <p class="muted" style="margin:0 0 8px">Collaboration</p>
+                        <ul class="list">
+                            <li>유관부서/외주와의 커뮤니케이션을 <b>명확한 산출물</b>로 정리</li>
+                            <li>결정 기준/우선순위를 투명하게 공유</li>
+                            <li>성과/인사이트를 팀 단위로 확산</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
+                <div>© 2026 Kim Yeonju. All rights reserved.</div>
+                <div style="font-weight:600; display: flex; gap: 20px;">
+                    <span>idsj2824@naver.com</span>
+                    <span>010-8823-2824</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // ---------------------------
+        // Password Gate (client-side)
+        // ---------------------------
+        // 1) 아래 PASSWORD를 원하는 값으로 바꾸세요.
+        // 2) 더 강한 보안이 필요하면, 서버 Basic Auth/비공개 공유로 운영 권장.
+        const PASSWORD = "12345678";
+
+        const gate = document.getElementById('gate');
+        const app = document.getElementById('app');
+        const pw = document.getElementById('pw');
+        const enter = document.getElementById('enter');
+        const err = document.getElementById('err');
+
+        function unlock() {
+            gate.style.display = 'none';
+            app.style.display = 'block';
+            sessionStorage.setItem('portfolio_unlocked', '1');
+        }
+
+        function tryEnter() {
+            if (pw.value === PASSWORD) {
+                err.style.display = 'none';
+                unlock();
+            } else {
+                err.style.display = 'block';
+            }
+        }
+
+        if (sessionStorage.getItem('portfolio_unlocked') === '1') {
+            unlock();
+        }
+
+        enter.addEventListener('click', tryEnter);
+        pw.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryEnter(); });
+
+        // Tip: 이미지 파일명은 /assets 폴더 기준입니다.
+        // - da_1.png, da_2.png, da_3.png
+        // - promo_page_capture.png
+        // - case2_1.png, case2_2.png
+        // - case3_before.png, case3_after.png
+        // - satisfaction_report_cover.png
+    </script>
+</body>
+
+</html>
