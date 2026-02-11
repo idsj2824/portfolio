@@ -50,87 +50,6 @@
             padding: 28px 18px 80px
         }
 
-        /* Password gate */
-        .gate {
-            position: fixed;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            background: radial-gradient(1200px 700px at 15% 0%, rgba(255, 106, 0, .18), transparent 55%),
-                radial-gradient(900px 600px at 85% 10%, rgba(255, 138, 61, .14), transparent 55%),
-                #07080b;
-            z-index: 9999;
-        }
-
-        .gate-card {
-            width: min(520px, 92vw);
-            background: rgba(17, 19, 26, .80);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            padding: 22px;
-            backdrop-filter: blur(10px);
-        }
-
-        .gate-badge {
-            display: inline-flex;
-            gap: 8px;
-            align-items: center;
-            padding: 6px 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 106, 0, .35);
-            background: rgba(255, 106, 0, .10);
-            color: var(--text);
-            font-size: 12px;
-        }
-
-        .gate h1 {
-            margin: 12px 0 6px;
-            font-size: 20px
-        }
-
-        .gate p {
-            margin: 0 0 14px;
-            color: var(--muted);
-            font-size: 13px
-        }
-
-        .row {
-            display: flex;
-            gap: 10px;
-            align-items: center
-        }
-
-        input[type="password"] {
-            flex: 1;
-            padding: 12px 12px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, .16);
-            background: rgba(0, 0, 0, .25);
-            color: var(--text);
-            outline: none;
-        }
-
-        input[type="password"]:focus {
-            border-color: rgba(255, 106, 0, .55)
-        }
-
-        button {
-            padding: 12px 14px;
-            border: 0;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            color: #0b0c10;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .err {
-            margin-top: 10px;
-            color: #ffb3a0;
-            font-size: 12px;
-            display: none
-        }
 
         header {
             padding: 22px 0 10px;
@@ -682,9 +601,6 @@
 
         /* Print */
         @media print {
-            .gate {
-                display: none !important
-            }
 
             body {
                 background: #fff;
@@ -704,24 +620,8 @@
 
 <body>
 
-    <!-- Password Gate (lightweight; not strong security) -->
-    <div class="gate" id="gate">
-        <div class="gate-card">
-            <div class="gate-badge">🔒 비공개 포트폴리오</div>
-            <h1>접근 비밀번호를 입력해 주세요</h1>
-            <p>링크 공유는 가능하지만, 비밀번호는 별도 전달용입니다.</p>
-            <div class="row">
-                <input id="pw" type="password" placeholder="Password" autocomplete="current-password" />
-                <button id="enter">입장</button>
-            </div>
-            <div class="err" id="err">비밀번호가 올바르지 않습니다.</div>
-            <p class="muted" style="margin-top:12px;">
-                * 보안이 매우 중요한 경우, GitHub Pages 단독 공개 대신 서버 Basic Auth(또는 Notion 비번/기업용 공유)로 운영을 권장합니다.
-            </p>
-        </div>
-    </div>
 
-    <div class="wrap" id="app" style="display:none">
+    <div class="wrap" id="app">
 
         <header>
             <div class="row align-center space-between" style="flex-wrap: wrap; gap: 20px;">
@@ -729,7 +629,7 @@
                     <img src="assets/profile.png" alt="Profile" class="profile-img" />
                     <div>
                         <h1 class="name">김연주</h1>
-                        <p class="role">디지털 마케팅 과장 | 교육 서비스 콘텐츠·캠페인·서비스 기획 리드</p>
+                        <p class="role">이투스ECI 사업실 교육팀 마케팅파트 과장 | 교육 서비스 콘텐츠·캠페인·서비스 기획 리드</p>
                     </div>
                 </div>
                 <div class="pill"
@@ -1017,40 +917,6 @@
     </div>
 
     <script>
-        // ---------------------------
-        // Password Gate (client-side)
-        // ---------------------------
-        // 1) 아래 PASSWORD를 원하는 값으로 바꾸세요.
-        // 2) 더 강한 보안이 필요하면, 서버 Basic Auth/비공개 공유로 운영 권장.
-        const PASSWORD = "12345678";
-
-        const gate = document.getElementById('gate');
-        const app = document.getElementById('app');
-        const pw = document.getElementById('pw');
-        const enter = document.getElementById('enter');
-        const err = document.getElementById('err');
-
-        function unlock() {
-            gate.style.display = 'none';
-            app.style.display = 'block';
-            sessionStorage.setItem('portfolio_unlocked', '1');
-        }
-
-        function tryEnter() {
-            if (pw.value === PASSWORD) {
-                err.style.display = 'none';
-                unlock();
-            } else {
-                err.style.display = 'block';
-            }
-        }
-
-        if (sessionStorage.getItem('portfolio_unlocked') === '1') {
-            unlock();
-        }
-
-        enter.addEventListener('click', tryEnter);
-        pw.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryEnter(); });
 
         // Tip: 이미지 파일명은 /assets 폴더 기준입니다.
         // - da_1.png, da_2.png, da_3.png
