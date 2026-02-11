@@ -19,7 +19,7 @@
 
 ## 📬 Contact
 - **Email**: idsj2824@naver.com
-- **Blog/SNS**: [Portfolio Link](https://idsj2824.github.io/portfolio/)
+- **Portfolio**: [Visit My Portfolio](https://idsj2824.github.io/portfolio/)
 
 ---
 © 2026 Kim Yeonju. All rights reserved.
